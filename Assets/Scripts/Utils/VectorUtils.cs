@@ -2,17 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VectorUtils : MonoBehaviour
+public static class VectorUtils
 {
-    
-    void Start()
+    public static Vector2 GetWorldPositionFromMousePosition(Camera camera)
     {
-        
+        return camera.ScreenToWorldPoint(Input.mousePosition);
     }
-
-    
-    void Update()
+    public static Vector2Int GetCoordinatesFromWorldPosition(Vector3 worldPosition)
     {
-        
+        return new Vector2Int(Mathf.FloorToInt((worldPosition.x / GridConstants.DistanceBtwSlots)) , Mathf.FloorToInt((worldPosition.y / GridConstants.DistanceBtwSlots)));
     }
+   
 }

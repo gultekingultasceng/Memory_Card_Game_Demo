@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BackGround
+    uniqueID: 1729134021
+    locked: 0
+  - name: Slots
+    uniqueID: 2376607331
+    locked: 0
+  - name: Card
+    uniqueID: 2499582431
+    locked: 0
