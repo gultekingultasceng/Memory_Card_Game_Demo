@@ -28,16 +28,21 @@ public class DeckManager : Singleton<DeckManager>
             //GENERATE CARD
             CardScript card = CreateCard();
             CardScript cardDuplicated = CreateCard();
-            card.SetTheCardForStart(cardIcon);
-            cardDuplicated.SetTheCardForStart(cardIcon);
+            card.SetTheCardForStart(cardIcon , i);
+            cardDuplicated.SetTheCardForStart(cardIcon , i);
             _generatedDeck.Add(card);
             _generatedDeck.Add(cardDuplicated);
         }
         _generatedDeck.Shuffle();
     }
+    
     private CardScript CreateCard()
     {
        return Instantiate(cardPrefab, this.transform).GetComponent<CardScript>();
+    }
+    public List<CardScript> GetDeck()
+    {
+        return _generatedDeck;
     }
 
     

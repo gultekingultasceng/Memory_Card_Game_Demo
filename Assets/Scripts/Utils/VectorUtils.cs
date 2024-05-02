@@ -12,5 +12,9 @@ public static class VectorUtils
     {
         return new Vector2Int(Mathf.FloorToInt((worldPosition.x / GridConstants.DistanceBtwSlots)) , Mathf.FloorToInt((worldPosition.y / GridConstants.DistanceBtwSlots)));
     }
-   
+    public static Vector3 GetWorldPositionFromCoordinates(Vector2Int coordinates)
+    {
+        float distanceBtwSlots = GridConstants.DistanceBtwSlots;
+        return new Vector3(coordinates.x * distanceBtwSlots , coordinates.y * distanceBtwSlots , 0);
+    }
 }

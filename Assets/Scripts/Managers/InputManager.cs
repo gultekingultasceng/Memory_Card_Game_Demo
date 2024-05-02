@@ -42,7 +42,6 @@ public class InputManager : Singleton<InputManager>
             {
                 if (IsMouseInGridArea(VectorUtils.GetCoordinatesFromWorldPosition(_mousePosition)))
                 {
-                    Debug.Log(VectorUtils.GetCoordinatesFromWorldPosition(_mousePosition));
                     OnLeftMouseButtonClick.Publish(VectorUtils.GetCoordinatesFromWorldPosition(_mousePosition));
                 }
                

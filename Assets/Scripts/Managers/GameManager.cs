@@ -15,8 +15,10 @@ public class GameManager : Singleton<GameManager>
     {
         int gridRowCount = _gameSettings.GridRowCount;
         int gridColumnCount = _gameSettings.GridColumnCount;
+        DeckManager.Instance.Initialize(gridRowCount, gridColumnCount);
         GridManager.Instance.Initialize(gridRowCount , gridColumnCount);
         InputManager.Instance.Initialize();
-        DeckManager.Instance.Initialize(gridRowCount , gridColumnCount);
+        GameplayManager.Instance.Initialize();
+        
     }
 }

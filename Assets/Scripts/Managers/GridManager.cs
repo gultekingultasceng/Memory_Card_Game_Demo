@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Linq;
 public class GridManager : Singleton<GridManager>
 {
     private int rowCount;
@@ -12,16 +12,23 @@ public class GridManager : Singleton<GridManager>
         ((Mathf.CeilToInt((rowCount) * .5f) * GridConstants.DistanceBtwSlots) - GridConstants.DistanceBtwSlots * .5f) + 1,
         ((Mathf.CeilToInt((columnCount) * .5f) * GridConstants.DistanceBtwSlots) - GridConstants.DistanceBtwSlots * .5f) + 1,
     };
-    public List<SlotInfo> slotInfos = new List<SlotInfo>();
-    private void GenerateGrid()
+    [SerializeField] private List<SlotInfo> slotInfos;
+    private void GenerateGridAndPutCardsFromDeck()
     {
+        slotInfos = new List<SlotInfo>();
+        var deck = DeckManager.Instance.GetDeck();
+        int deckIndex = 0;
         for (int i = 0; i < rowCount; i++)
         {
             for(int j = 0; j < columnCount; j++)
             {
                 GameObject slotObj = Instantiate(SlotPrefab,this.transform);
-                float distanceBtwSlots = GridConstants.DistanceBtwSlots;
-                slotObj.transform.localPosition = new Vector3(i* distanceBtwSlots, j* distanceBtwSlots, 0);
+                Vector3 targetSlotPosition = VectorUtils.GetWorldPositionFromCoordinates(new Vector2Int(i, j));
+                slotObj.transform.localPosition = targetSlotPosition;
+                CardScript card = deck[deckIndex];
+                card.transform.position = targetSlotPosition;
+                slotInfos.Add(new SlotInfo(new Vector2Int(i, j), card));
+                deckIndex++;
             }
         }
     }
@@ -29,14 +36,27 @@ public class GridManager : Singleton<GridManager>
     {
         this.rowCount = rowCount;
         this.columnCount = columnCount;
-        GenerateGrid();
+        GenerateGridAndPutCardsFromDeck();
     }
     [System.Serializable]
     public class SlotInfo
     {
         public Vector2Int slotCoordinate;
         public CardScript holdedCard;
+        public SlotInfo(Vector2Int slotCoordinate, CardScript holdedCard)
+        {
+            this.slotCoordinate = slotCoordinate;
+            this.holdedCard = holdedCard;
+        }   
     }
+    public CardScript GetCardFromCoordinate(Vector2Int coordinate)
+    {
+        return slotInfos
+                       .Where(slot => slot.slotCoordinate == coordinate)
+                       .Select(slot => slot.holdedCard)
+                       .FirstOrDefault();
+    }
+
 }
 
 
