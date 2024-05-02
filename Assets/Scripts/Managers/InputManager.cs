@@ -12,33 +12,57 @@ public class InputManager : Singleton<InputManager>
     public Vector2 MousePosition { get => _mousePosition;}
     private bool _isOnUI = false;
     public EventPublisher<Vector2Int> OnLeftMouseButtonClick;
+    private Vector2Int _xEdge, _yEdge;
     
     public void Initialize()
     {
         OnLeftMouseButtonClick = new EventPublisher<Vector2Int>();
         _cameraParentTransform = mainCamera.transform.parent;
         SetCameraPositionToCenter();
+        SetEdges();
     }
     public void SetCameraPositionToCenter()
     {
         float[] centerOfGrid = GridManager.Instance.GetWorldPositionCenterOfGrid;
         _cameraParentTransform.position = new Vector3(centerOfGrid[0], centerOfGrid[1], 0f);
     }
+    public void SetEdges()
+    {
+        Vector2Int rowAndColumn = GridManager.Instance.RowAndColumn;
+        _xEdge = new Vector2Int(0, rowAndColumn.x);
+        _yEdge = new Vector2Int(0, rowAndColumn.y);
+    }
     private void Update()
     {
         _mousePosition = VectorUtils.GetWorldPositionFromMousePosition(mainCamera);
         _isOnUI = EventSystem.current.IsPointerOverGameObject();
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            if (isAvailableToShareInputData())
-                OnLeftMouseButtonClick.Publish(VectorUtils.GetCoordinatesFromWorldPosition(_mousePosition));
+            if (!IsMouseOverOnUI())
+            {
+                if (IsMouseInGridArea(VectorUtils.GetCoordinatesFromWorldPosition(_mousePosition)))
+                {
+                    Debug.Log(VectorUtils.GetCoordinatesFromWorldPosition(_mousePosition));
+                    OnLeftMouseButtonClick.Publish(VectorUtils.GetCoordinatesFromWorldPosition(_mousePosition));
+                }
+               
+            }
+               
         }
     }
-
-    private bool isAvailableToShareInputData()
+  
+    private bool IsMouseInGridArea(Vector2Int mouseCoordinates)
     {
-        return !_isOnUI;
+        return  mouseCoordinates.x >= _xEdge.x &&
+                mouseCoordinates.x <= _xEdge.y - 1 &&
+                mouseCoordinates.y >= _yEdge.x &&
+                mouseCoordinates.y <= _yEdge.y - 1;
     }
+    private bool IsMouseOverOnUI()
+    {
+        return _isOnUI;
+    }
+
  
 
 }
