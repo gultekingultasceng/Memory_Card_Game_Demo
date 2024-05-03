@@ -37,7 +37,24 @@ public class DeckManager : Singleton<DeckManager>
         }
         _generatedDeck.Shuffle();
     }
-    
+    public bool IsAllCardsInDeckMatched()
+    {
+        foreach (var card in _generatedDeck)
+        {
+            if (!card.IsMatched)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    public void PutCardsBackToDeck()
+    {
+        foreach (var card in _generatedDeck)
+        {
+            cardPool.ReturnObject(card);
+        }
+    }
     private CardScript CreateCard()
     {
         return cardPool.GetObject(cardPrefab,this.transform);
@@ -46,6 +63,4 @@ public class DeckManager : Singleton<DeckManager>
     {
         return _generatedDeck;
     }
-
-    
 }

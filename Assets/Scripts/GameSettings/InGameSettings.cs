@@ -14,7 +14,7 @@ public class InGameSettings : MonoBehaviour
         new Vector2Int(6, 6),
     };
     private int roundTime = 1; // a minute
-    private int roundCount = 1;
+    private int roundCount = 2;
     private int gridRowCount = 4,gridColumnCount = 4;
 
     

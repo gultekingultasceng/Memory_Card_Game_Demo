@@ -25,8 +25,42 @@ public class PlayerManager : MonoBehaviour
         GeneratePlayers();
         SetTurn();
     }
+    public void SetWinnerOfTheRound()
+    {
+        if (_playerList.Count == 1)
+        {
+            _playerList[0].ResetPoint();
+            _playerList[0].EarnScore();
+            OnPlayerDataChanged.Publish(0);
+        }
+        else
+        {
+            int maxPoint = -1;
+            int targetIndex = -1;
+            for (int i = 0; i < _playerList.Count; i++)
+            {
+              
+                if (_playerList[i].PlayerPoint >= maxPoint)
+                {
+                    maxPoint = _playerList[i].PlayerPoint;
+                    targetIndex = i;
+                    _playerList[i].ResetPoint();
+                }
+            }
+            
+            _playerList[targetIndex].EarnScore();
+            for (int i = 0; i < _playerList.Count; i++)
+            {
+                OnPlayerDataChanged.Publish(i);
+            }
+              
+
+        }
+        
+    }
     public List<PlayerScript> PlayerList => _playerList;
     public PlayerScript CurrentlyPlayer => _playerList[_currentlyPlayerIndex];
+
     public void SetTurn()
     {
         _currentlyPlayerIndex++;
@@ -47,10 +81,6 @@ public class PlayerManager : MonoBehaviour
         CurrentlyPlayer.EarnPoint();
         OnPlayerDataChanged.Publish(_currentlyPlayerIndex);
     }
-    public void EarnScoreToCurrentlyPlayer()
-    {
-        CurrentlyPlayer.EarnScore();
-        OnPlayerDataChanged.Publish(_currentlyPlayerIndex);
-    }
+
     
 }

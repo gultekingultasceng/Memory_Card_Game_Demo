@@ -27,5 +27,9 @@ public class PlayerScript : PlayerTemplate , IPlayable
     {
         this.playerScore++;
     }
+    public void ResetPoint()
+    {
+        this.playerPoint = 0;
+    }
   
 }

@@ -7,14 +7,14 @@ public class GridManager : Singleton<GridManager>
     private int rowCount;
     private int columnCount;
     public Vector2Int RowAndColumn => new Vector2Int(rowCount, columnCount);
-    [SerializeField] private GameObject SlotPrefab;
     public float[] GetWorldPositionCenterOfGrid => new float[2] {
         ((Mathf.CeilToInt((rowCount) * .5f) * GridConstants.DistanceBtwSlots) - GridConstants.DistanceBtwSlots * .5f) + 1,
         ((Mathf.CeilToInt((columnCount) * .5f) * GridConstants.DistanceBtwSlots) - GridConstants.DistanceBtwSlots * .5f) + 1,
     };
     [SerializeField] private List<SlotInfo> slotInfos;
-    private void GenerateGridAndPutCardsFromDeck()
+    private void GenerateGridAndGetCardsFromDeck()
     {
+        DeckManager.Instance.Initialize(rowCount, columnCount);
         slotInfos = new List<SlotInfo>();
         var deck = DeckManager.Instance.GetDeck();
         int deckIndex = 0;
@@ -22,21 +22,23 @@ public class GridManager : Singleton<GridManager>
         {
             for(int j = 0; j < columnCount; j++)
             {
-                GameObject slotObj = Instantiate(SlotPrefab,this.transform);
-                Vector3 targetSlotPosition = VectorUtils.GetWorldPositionFromCoordinates(new Vector2Int(i, j));
-                slotObj.transform.localPosition = targetSlotPosition;
                 CardScript card = deck[deckIndex];
-                card.transform.position = targetSlotPosition;
+                card.transform.position = VectorUtils.GetWorldPositionFromCoordinates(new Vector2Int(i, j));
                 slotInfos.Add(new SlotInfo(new Vector2Int(i, j), card));
                 deckIndex++;
             }
         }
     }
+    public void ReArrangeTheGridForNewPlay()
+    {
+        DeckManager.Instance.PutCardsBackToDeck();
+        GenerateGridAndGetCardsFromDeck();
+    }
     public void Initialize(int rowCount, int columnCount)
     {
         this.rowCount = rowCount;
         this.columnCount = columnCount;
-        GenerateGridAndPutCardsFromDeck();
+        GenerateGridAndGetCardsFromDeck();
     }
     [System.Serializable]
     public class SlotInfo
@@ -56,6 +58,7 @@ public class GridManager : Singleton<GridManager>
                        .Select(slot => slot.holdedCard)
                        .FirstOrDefault();
     }
+
 
 }
 

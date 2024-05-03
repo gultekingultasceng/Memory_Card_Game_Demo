@@ -20,6 +20,7 @@ public class GameplayManager : Singleton<GameplayManager>
         OnRoundTimeChange = new EventPublisher<float, float>();
         EventSubscriber<Vector2Int>.Subscribe(InputManager.Instance.OnLeftMouseButtonClick, OnTryToSelect);
         EventSubscriber.Subscribe(_matchingSystem.OnMatch,_playerManager.EarnPointToCurrentlyPlayer);
+        EventSubscriber.Subscribe(_matchingSystem.OnMatch, CheckCardsMatchesAll);
         EventSubscriber.Subscribe(_matchingSystem.OnDisMatch, _playerManager.SetTurn);
         EventSubscriber<int>.Subscribe(_playerManager.OnPlayerDataChanged, UIManager.Instance.OnGamePanelUIPlayerDataChanged);
     }
@@ -33,6 +34,12 @@ public class GameplayManager : Singleton<GameplayManager>
             _matchingSystem.AddTheCardMatchingSystem(_selectedCard);
         }
     }
+    private void CheckCardsMatchesAll()
+    {
+        if (DeckManager.Instance.IsAllCardsInDeckMatched())
+            NextRound();
+    }
+
     public void StartGameplay(int gameRoundTime , int gameRoundCount)
     {
         maxRoundTime = gameRoundTime * 60; // second
@@ -43,9 +50,11 @@ public class GameplayManager : Singleton<GameplayManager>
         OnRoundTimeChange.Publish(currentRoundTime, maxRoundTime);
         OnRoundChange.Publish(currentRoundCount, maxRoundCount);
     }
+
     public void NextRound()
     {
         StopCoroutine(roundCooldown);
+        _playerManager.SetWinnerOfTheRound();
         if (currentRoundCount + 1 > maxRoundCount)
         {
             // GAME END CHECK WINNER !
@@ -53,6 +62,7 @@ public class GameplayManager : Singleton<GameplayManager>
             OnRoundChange.Publish(maxRoundCount, maxRoundCount);
             return;
         }
+        GridManager.Instance.ReArrangeTheGridForNewPlay();
         currentRoundCount++;
         currentRoundTime = maxRoundTime;
         OnRoundChange.Publish(currentRoundCount,maxRoundCount);
