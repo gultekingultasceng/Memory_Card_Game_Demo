@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class MathcingSystem
+public class MathchingSystem : MonoBehaviour
 {
-    static List<CardScript> selectedCards = new List<CardScript>();
-    public static void AddTheCardMatchingSystem(CardScript card)
+    private List<CardScript> selectedCards = new List<CardScript>();
+    public EventPublisher OnMatch = new EventPublisher();
+    public EventPublisher OnDisMatch = new EventPublisher();
+    public void AddTheCardMatchingSystem(CardScript card)
     {
         if (!card.IsCardSelectable)
             return;
@@ -14,7 +16,7 @@ public static class MathcingSystem
         if (selectedCards.Count == 2)
             CheckMatching();
     }
-    private static void CheckMatching()
+    private void CheckMatching()
     {
         CardScript firstCard = selectedCards[0];
         CardScript secondCard = selectedCards[1];
@@ -23,11 +25,13 @@ public static class MathcingSystem
         {
             firstCard.OnMatched();
             secondCard.OnMatched();
+            OnMatch.Publish();
         }
         else
         {
             firstCard.OnDismatched();
             secondCard.OnDismatched();
+            OnDisMatch.Publish();
         }
     }
 }

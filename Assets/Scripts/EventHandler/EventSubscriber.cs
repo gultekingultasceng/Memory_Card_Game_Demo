@@ -27,3 +27,15 @@ public static class EventSubscriber<T>
         publisher.MyAction -= func;
     }
 }
+public static class EventSubscriber<T1,T2>
+{
+    public static void Subscribe(EventPublisher<T1,T2> publisher, Action<T1,T2> func)
+    {
+        publisher.MyAction += func;
+    }
+
+    public static void Unsubscribe(EventPublisher<T1,T2> publisher, Action<T1,T2> func)
+    {
+        publisher.MyAction -= func;
+    }
+}

@@ -20,3 +20,12 @@ public interface IEventPublisher
     }
     void Publish();
 }
+
+public interface IEventPublisher<T1,T2>
+{
+    public Action<T1,T2> MyAction
+    {
+        get; set;
+    }
+    void Publish(T1 Data , T2 Data2);
+}
