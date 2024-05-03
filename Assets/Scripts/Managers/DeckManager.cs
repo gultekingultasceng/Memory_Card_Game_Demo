@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class DeckManager : Singleton<DeckManager>
 {
+    [SerializeField] private CardPool cardPool;
     [SerializeField] private GameObject cardPrefab;
     [SerializeField] private Sprite[] cardIcons;
     private List<CardScript> _generatedDeck;
+    
     public void Initialize(int rowCount, int columnCount)
     {
         GenerateDeckForGame(rowCount,columnCount);
@@ -38,7 +40,7 @@ public class DeckManager : Singleton<DeckManager>
     
     private CardScript CreateCard()
     {
-       return Instantiate(cardPrefab, this.transform).GetComponent<CardScript>();
+        return cardPool.GetObject(cardPrefab,this.transform);
     }
     public List<CardScript> GetDeck()
     {

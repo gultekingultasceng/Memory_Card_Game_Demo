@@ -36,7 +36,7 @@ public class InputManager : Singleton<InputManager>
     {
         _mousePosition = VectorUtils.GetWorldPositionFromMousePosition(mainCamera);
         _isOnUI = EventSystem.current.IsPointerOverGameObject();
-        if (Input.GetMouseButtonDown(0))
+        if (IsClicked())
         {
             if (!IsMouseOverOnUI())
             {
@@ -44,12 +44,13 @@ public class InputManager : Singleton<InputManager>
                 {
                     OnLeftMouseButtonClick.Publish(VectorUtils.GetCoordinatesFromWorldPosition(_mousePosition));
                 }
-               
             }
-               
         }
     }
-  
+    private bool IsClicked()
+    {
+        return Input.GetMouseButtonDown(0);
+    }
     private bool IsMouseInGridArea(Vector2Int mouseCoordinates)
     {
         return  mouseCoordinates.x >= _xEdge.x &&

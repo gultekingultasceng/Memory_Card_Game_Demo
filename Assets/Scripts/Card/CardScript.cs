@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CardUIScript))]
-public class CardScript : MonoBehaviour , ICardState , IMatchable
+public class CardScript : MonoBehaviour , ICardState , IMatchable , IEnableDisable
 {
     private int _uniqueId;
     private CardUIScript _cardUIScript;
@@ -64,5 +64,15 @@ public class CardScript : MonoBehaviour , ICardState , IMatchable
         _canFlip = true;
         _isMatched = false;
         Invoke(nameof(Flip), .5f);
+    }
+
+    public void PerformOnEnable()
+    {
+        this.gameObject.SetActive(true);
+    }
+
+    public void PerformOnDisable()
+    {
+        this.gameObject.SetActive(false);
     }
 }

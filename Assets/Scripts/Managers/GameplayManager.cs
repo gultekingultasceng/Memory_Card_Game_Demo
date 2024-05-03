@@ -8,10 +8,9 @@ public class GameplayManager : Singleton<GameplayManager>
     {
         EventSubscriber<Vector2Int>.Subscribe(InputManager.Instance.OnLeftMouseButtonClick, OnTryToSelect);
     }
-    [SerializeField] private CardScript _selectedCard;
+    private CardScript _selectedCard;
     private void OnTryToSelect(Vector2Int coordinate)
     {
-        Debug.Log(coordinate);
         _selectedCard = GridManager.Instance.GetCardFromCoordinate(coordinate);
         if (_selectedCard != null )
         {
