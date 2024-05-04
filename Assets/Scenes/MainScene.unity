@@ -1611,6 +1611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b66b04b97515614a84da253a1b20581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cameraSetups: {fileID: 1315874308}
 --- !u!4 &356261678
 Transform:
   m_ObjectHideFlags: 0
@@ -1638,7 +1639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea0004a536b3d8b47b39da17bbfbc86e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCount: 2
+  playerCount: 1
   playerAvatarIcons:
   - {fileID: 21300000, guid: a0d735bf564847e46b61da32967adf6f, type: 3}
   - {fileID: 21300000, guid: c0058517611b55e42a8247c82850fdf2, type: 3}
@@ -2318,7 +2319,7 @@ Camera:
   far clip plane: 200
   field of view: 60
   orthographic: 1
-  orthographic size: 7.3
+  orthographic size: 7.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -6141,6 +6142,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1315874307}
+  - component: {fileID: 1315874308}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -6164,6 +6166,18 @@ Transform:
   - {fileID: 519420032}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1315874308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315874306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13c8e2313d8255444ab78acb7e0a3bca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1338826127
 GameObject:
   m_ObjectHideFlags: 0
@@ -10010,7 +10024,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 24.4, y: 27.1}
+  m_AnchoredPosition: {x: 24.400024, y: 27.099998}
   m_SizeDelta: {x: 76.7263, y: 50}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1998509132

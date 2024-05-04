@@ -10,6 +10,7 @@ namespace MCG.Core.Managers
     public class GameplayManager : Singleton<GameplayManager>
     {
         private PlayerManager _playerManager;
+        [SerializeField] private CameraSetups _cameraSetups;
         private MathchingSystem _matchingSystem;
         private int currentRoundCount, maxRoundCount;
         private float currentRoundTime, maxRoundTime;
@@ -28,6 +29,7 @@ namespace MCG.Core.Managers
             EventSubscriber.Subscribe(_matchingSystem.OnMatch, CheckCardsMatchesAll);
             EventSubscriber.Subscribe(_matchingSystem.OnDisMatch, _playerManager.SetTurn);
             EventSubscriber<int>.Subscribe(_playerManager.OnPlayerDataChanged, UIManager.Instance.OnGamePanelUIPlayerDataChanged);
+            _cameraSetups.Initialize();
         }
         private void GameEnd()
         {

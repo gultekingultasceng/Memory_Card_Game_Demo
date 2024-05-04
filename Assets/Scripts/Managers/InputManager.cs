@@ -23,14 +23,9 @@ namespace MCG.Core.Managers
         {
             OnLeftMouseButtonClick = new EventPublisher<Vector2Int>();
             _cameraParentTransform = mainCamera.transform.parent;
-            SetCameraPositionToCenter();
             SetEdges();
         }
-        public void SetCameraPositionToCenter()
-        {
-            float[] centerOfGrid = GridManager.Instance.GetWorldPositionCenterOfGrid;
-            _cameraParentTransform.position = new Vector3(centerOfGrid[0], centerOfGrid[1], 0f);
-        }
+
         public void SetEdges()
         {
             Vector2Int rowAndColumn = GridManager.Instance.RowAndColumn;
