@@ -1639,7 +1639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea0004a536b3d8b47b39da17bbfbc86e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCount: 1
+  playerCount: 2
   playerAvatarIcons:
   - {fileID: 21300000, guid: a0d735bf564847e46b61da32967adf6f, type: 3}
   - {fileID: 21300000, guid: c0058517611b55e42a8247c82850fdf2, type: 3}
