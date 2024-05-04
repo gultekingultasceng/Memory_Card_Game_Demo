@@ -3,33 +3,36 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerScript : PlayerTemplate , IPlayable
+namespace MCG.Core.Base
 {
-    public PlayerScript(string name, Sprite avatar)
+    public class PlayerScript : PlayerTemplate, IPlayable
     {
-        this.playerName = name;
-        this.playerAvatar = avatar;
-        this.playerScore = 0;
-        this.playerPoint = 0;
-    }
-    private bool _isMyTurn = false;
-    public Sprite PlayerAvatar => this.playerAvatar;
-    public string PlayerName => this.playerName;
-    public int PlayerPoint => this.playerPoint;
-    public int PlayerScore => this.playerScore;
-    public bool IsMyTurnToPlay { get => _isMyTurn; set => _isMyTurn = value; }
+        public PlayerScript(string name, Sprite avatar)
+        {
+            playerName = name;
+            playerAvatar = avatar;
+            playerScore = 0;
+            playerPoint = 0;
+        }
+        private bool _isMyTurn = false;
+        public Sprite PlayerAvatar => playerAvatar;
+        public string PlayerName => playerName;
+        public int PlayerPoint => playerPoint;
+        public int PlayerScore => playerScore;
+        public bool IsMyTurnToPlay { get => _isMyTurn; set => _isMyTurn = value; }
 
-    public void EarnPoint()
-    {
-        this.playerPoint++;
+        public void EarnPoint()
+        {
+            playerPoint++;
+        }
+        public void EarnScore()
+        {
+            playerScore++;
+        }
+        public void ResetPoint()
+        {
+            playerPoint = 0;
+        }
+
     }
-    public void EarnScore()
-    {
-        this.playerScore++;
-    }
-    public void ResetPoint()
-    {
-        this.playerPoint = 0;
-    }
-  
 }

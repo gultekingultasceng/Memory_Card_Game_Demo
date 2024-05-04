@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class GridConstants
+namespace MCG.Core.Constants
 {
-    public const float DistanceBtwSlots = 2.35f;
+    public static class GridConstants
+    {
+        public const float DistanceBtwSlots = 2.35f;
+    }
 }

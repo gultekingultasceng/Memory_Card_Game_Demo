@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IMatchable
+namespace MCG.Core.Base
 {
-    bool IsMatched { get; }
-    void OnMatched();
-    void OnDismatched();
+    public interface IMatchable
+    {
+        bool IsMatched { get; }
+        void OnMatched();
+        void OnDismatched();
+    }
 }

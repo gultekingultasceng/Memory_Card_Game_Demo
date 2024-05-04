@@ -1,17 +1,21 @@
+using MCG.Core.Managers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EntryPanelUI : MonoBehaviour
+namespace MCG.Core.UI
 {
-    [SerializeField] private Button settingsButton;
-    [SerializeField] private Button startButton;
-
-    public void Initialize()
+    public class EntryPanelUI : MonoBehaviour
     {
-        settingsButton.onClick.AddListener(()=> UIManager.Instance.OpenSettingsPanel());
-        startButton.onClick.AddListener(()=> UIManager.Instance.CloseAllPanelsBeforeGameStart());
-    }
+        [SerializeField] private Button settingsButton;
+        [SerializeField] private Button startButton;
 
+        public void Initialize()
+        {
+            settingsButton.onClick.AddListener(() => UIManager.Instance.OpenSettingsPanel());
+            startButton.onClick.AddListener(() => UIManager.Instance.CloseAllPanelsBeforeGameStart());
+        }
+
+    }
 }

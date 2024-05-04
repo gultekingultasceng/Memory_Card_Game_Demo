@@ -1,11 +1,15 @@
+using MCG.Core.Factory;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardFactory : Factory<CardScript,GameObject,Transform>
+namespace MCG.Core.Base
 {
-    public override CardScript Create(GameObject param1, Transform param2)
+    public class CardFactory : Factory<CardScript, GameObject, Transform>
     {
-        return Instantiate(param1,param2).GetComponent<CardScript>();
+        public override CardScript Create(GameObject param1, Transform param2)
+        {
+            return Instantiate(param1, param2).GetComponent<CardScript>();
+        }
     }
 }

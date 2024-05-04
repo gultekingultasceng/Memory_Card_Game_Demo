@@ -1336,6 +1336,7 @@ MonoBehaviour:
   inGameSettingsPanel: {fileID: 1097055835}
   entryPanelUI: {fileID: 2092493980}
   gamePanelUI: {fileID: 213319820}
+  endGameUI: {fileID: 2027047441}
 --- !u!4 &227535126
 Transform:
   m_ObjectHideFlags: 0
@@ -1798,7 +1799,7 @@ GameObject:
   - component: {fileID: 380411968}
   - component: {fileID: 380411969}
   m_Layer: 5
-  m_Name: PLAYERPANEL2 (1)
+  m_Name: PLAYERPANEL2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2569,7 +2570,7 @@ GameObject:
   - component: {fileID: 597294570}
   - component: {fileID: 597294569}
   m_Layer: 5
-  m_Name: canceltext
+  m_Name: newgame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2958,7 +2959,7 @@ GameObject:
   - component: {fileID: 638776223}
   - component: {fileID: 638776224}
   m_Layer: 5
-  m_Name: PLAYERPANEL1 (1)
+  m_Name: PLAYERPANEL1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6416,7 +6417,7 @@ GameObject:
   - component: {fileID: 1393084453}
   - component: {fileID: 1393084452}
   m_Layer: 5
-  m_Name: canceltext
+  m_Name: exit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10166,6 +10167,7 @@ GameObject:
   - component: {fileID: 2027047440}
   - component: {fileID: 2027047439}
   - component: {fileID: 2027047438}
+  - component: {fileID: 2027047441}
   m_Layer: 5
   m_Name: EndGame
   m_TagString: Untagged
@@ -10251,6 +10253,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2027047436}
   m_CullTransparentMesh: 1
+--- !u!114 &2027047441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2027047436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee33d9d172b213f4082f06b38ed3866b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPanels:
+  - playerNameText: {fileID: 762776339}
+    playerPointText: {fileID: 0}
+    playerScoreText: {fileID: 1701175385}
+    playerAvatarImage: {fileID: 1484924023}
+    playerCanvasGroup: {fileID: 638776224}
+  - playerNameText: {fileID: 2074549291}
+    playerPointText: {fileID: 0}
+    playerScoreText: {fileID: 2113624166}
+    playerAvatarImage: {fileID: 297554119}
+    playerCanvasGroup: {fileID: 380411969}
+  exitButton: {fileID: 2074974498}
+  newGameButton: {fileID: 1601505573}
+  winnerText: {fileID: 389494137}
 --- !u!1 &2033655501
 GameObject:
   m_ObjectHideFlags: 0

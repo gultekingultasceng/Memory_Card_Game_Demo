@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IEnableDisable
+namespace MCG.Core.Base
 {
-    void PerformOnEnable();
-    void PerformOnDisable();
+    public interface IEnableDisable
+    {
+        void PerformOnEnable();
+        void PerformOnDisable();
+    }
 }

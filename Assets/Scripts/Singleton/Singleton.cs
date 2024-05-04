@@ -1,5 +1,7 @@
 using UnityEngine;
 
+namespace MCG.Core.Singleton
+{
     public abstract class Singleton<T> : MonoBehaviour where T : Component
     {
         private static T _instance;
@@ -33,5 +35,4 @@ using UnityEngine;
             }
         }
     }
-
-
+}

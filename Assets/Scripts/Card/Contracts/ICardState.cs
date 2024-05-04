@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ICardState
+namespace MCG.Core.Base
 {
-    void Flip();
-    bool IsRevealed { get; }
-    bool CanFlip { get; }
+    public interface ICardState
+    {
+        void Flip();
+        bool IsRevealed { get; }
+        bool CanFlip { get; }
+    }
 }

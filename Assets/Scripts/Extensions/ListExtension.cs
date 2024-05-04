@@ -2,20 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
-public static class ListExtension
+
+namespace MCG.Core.Extensions
 {
-   
-    public static void Shuffle<T>(this IList<T> list)
+    public static class ListExtension
     {
-        int n = list.Count;
-        Random rnd = new Random();
-        while (n > 1)
+
+        public static void Shuffle<T>(this IList<T> list)
         {
-            n--;
-            int k = rnd.Next(n + 1);
-            T value = list[k];
-            list[k] = list[n];
-            list[n] = value;
+            int n = list.Count;
+            Random rnd = new Random();
+            while (n > 1)
+            {
+                n--;
+                int k = rnd.Next(n + 1);
+                T value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
         }
     }
 }

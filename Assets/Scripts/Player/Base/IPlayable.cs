@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IPlayable
+namespace MCG.Core.Base
 {
-    void EarnPoint();
-    void EarnScore();
-    bool IsMyTurnToPlay { get; set; }
+    public interface IPlayable
+    {
+        void EarnPoint();
+        void EarnScore();
+        bool IsMyTurnToPlay { get; set; }
+    }
 }
